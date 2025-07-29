@@ -1,8 +1,9 @@
 "use client"
 
 import type React from "react"
-
+import { useRouter } from 'next/navigation'
 import { Typography, Box, Button, FormControlLabel, Checkbox, Paper } from "@mui/material"
+import axios from "axios"
 
 interface TermsStepProps {
   formData: any
@@ -11,15 +12,35 @@ interface TermsStepProps {
 }
 
 export default function TermsStep({ formData, onFormDataChange, onBack }: TermsStepProps) {
+  const router = useRouter()
   const handleCheckboxChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     onFormDataChange({
       [name]: event.target.checked,
     })
   }
 
-  const handleSubmit = () => {
-    console.log("Registration completed:", formData)
-    // ここで実際の登録処理を行う
+  const handleSubmit = async () => {
+    console.log(formData)
+    try {
+      // サインアップ
+      await axios.post("http://localhost:8888/auth/signup", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      // サインアップ成功後に自動ログイン
+      await axios.post("http://localhost:8888/auth/login", {
+        email: formData.email,
+        password: formData.password,
+      }, {
+        withCredentials: true,
+      })
+      router.push("/user/dashboard")
+    } catch (error: any) {
+      console.error("登録失敗:", error.response?.data || error.message)
+      alert("登録に失敗しました。もう一度お試しください。")
+    }
   }
 
   const canSubmit = formData.agreeToTerms && formData.agreeToPrivacy

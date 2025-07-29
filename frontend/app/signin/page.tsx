@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Container, Paper, TextField, Button, Typography, Box, Divider, Link as MuiLink } from "@mui/material"
+import { Container, Paper, TextField, Button, Typography, Box, Divider } from "@mui/material"
 import Link from "next/link"
 
 export default function SignInPage() {
@@ -135,10 +135,8 @@ export default function SignInPage() {
           <Box className="text-center mt-6">
             <Typography variant="body2" className="text-gray-600">
               アカウントをお持ちでない方は{" "}
-              <Link href="/signup">
-                <MuiLink className="text-blue-600 hover:text-blue-700 font-medium cursor-pointer">
-                  こちらから登録
-                </MuiLink>
+              <Link href="/signup" className="text-blue-600 hover:text-blue-700 font-medium cursor-pointer">
+                こちらから登録
               </Link>
             </Typography>
           </Box>

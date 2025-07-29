@@ -1,0 +1,41 @@
+package repository
+
+import (
+	"peer-match-ai/domain"
+	"gorm.io/gorm"
+)
+
+type UserRepository interface {
+    FindByEmail(email string) (*domain.User, error)
+    Create(user *domain.User) error
+    FindByID(id uint) (*domain.User, error) // 追加
+}
+
+type userRepository struct {
+	db *gorm.DB
+}
+
+func (r *userRepository) Create(user *domain.User) error {
+    return r.db.Create(user).Error
+}
+
+func NewUserRepository(db *gorm.DB) UserRepository {
+	return &userRepository{db: db}
+}
+
+// メールアドレスからユーザーを探す
+func (r *userRepository) FindByEmail(email string) (*domain.User, error) {
+	var user domain.User
+	if err := r.db.Where("email = ?", email).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
+
+func (r *userRepository) FindByID(id uint) (*domain.User, error) {
+    var user domain.User
+    if err := r.db.First(&user, id).Error; err != nil {
+        return nil, err
+    }
+    return &user, nil
+}

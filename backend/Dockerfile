@@ -1,6 +1,8 @@
 FROM golang:1.24-alpine
 
-RUN apk add --no-cache git curl
+RUN apk add --no-cache git curl build-base
+
+ENV CGO_ENABLED=1
 
 RUN go install github.com/cosmtrek/air@v1.40.4
 
