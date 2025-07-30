@@ -1,16 +1,6 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: appdb
-    ports:
-      - "5432:5432"
-    volumes:
-      - db-data:/var/lib/postgresql/data
   gin-backend:
     build:
       context: ./backend
@@ -19,10 +9,6 @@ services:
       - "8888:8888"
     volumes:
       - ./backend:/main
-    depends_on:
-      - db
-    environment:
-      DB_DSN: host=db user=user password=password dbname=appdb port=5432 sslmode=disable TimeZone=Asia/Tokyo
     restart: always
   frontend:
     build: ./frontend
@@ -32,6 +18,3 @@ services:
       - ./frontend:/app
     working_dir: /app
     command: ["npm", "run", "dev"]
-
-volumes:
-  db-data:
