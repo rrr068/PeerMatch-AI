@@ -8,7 +8,7 @@ import (
     "peer-match-ai/middleware"
 )
 
-func SetupRouter(handler *handler.AuthHandler) *gin.Engine {
+func SetupRouter(authHandler *handler.AuthHandler, userHandler *handler.UserHandler) *gin.Engine {
     r := gin.Default()
 		r.Use(cors.New(cors.Config{
         AllowOrigins:     []string{"http://localhost:3456"},
@@ -18,13 +18,14 @@ func SetupRouter(handler *handler.AuthHandler) *gin.Engine {
         AllowCredentials: true,
         MaxAge:           12 * time.Hour,
     }))
+
     auth := r.Group("/auth")
-    auth.POST("/login", handler.Login)
-    auth.POST("/signup", handler.SignUp)
+    auth.POST("/login", authHandler.Login)
+    auth.POST("/signup", authHandler.SignUp)
 
     user := r.Group("/user")
     user.Use(middleware.JWTAuthMiddleware())
-    user.GET("/me", handler.GetMe)
+    user.GET("/userInfo", userHandler.GetUser)
 
     return r
 }

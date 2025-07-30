@@ -2,11 +2,14 @@ package handler
 
 import (
 	"net/http"
+	"strings"
+
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
+
+	"peer-match-ai/domain"
 	"peer-match-ai/utils"
 	"peer-match-ai/usecase"
-	"peer-match-ai/domain"
-	"golang.org/x/crypto/bcrypt"
 )
 
 type AuthHandler struct {
@@ -42,52 +45,51 @@ func (h *AuthHandler) Login(c *gin.Context) {
 }
 
 func (h *AuthHandler) SignUp(c *gin.Context) {
-	var req domain.User
+	var req struct {
+		Name            string   `json:"name"`
+		Email           string   `json:"email"`
+		Password        string   `json:"password"`
+		ConfirmPassword string   `json:"confirmPassword"`
+		CurrentPosition string   `json:"currentPosition"`
+		ExperienceLevel string   `json:"experienceLevel"`
+		Skills          []string `json:"skills"`
+		Interests       []string `json:"interests"`
+		TeachSkills     []string `json:"teachSkills"`
+		LearnSkills     []string `json:"learnSkills"`
+		IsTeacher       bool     `json:"isTeacher"`
+		IsLearner       bool     `json:"isLearner"`
+		AgreeToTerms    bool     `json:"agreeToTerms"`
+		AgreeToPrivacy  bool     `json:"agreeToPrivacy"`
+	}
 	if err := c.ShouldBindJSON(&req); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Request"})
-			return
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Request"})
+		return
 	}
 
-	// パスワードのハッシュ化
+	if req.Password != req.ConfirmPassword {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Passwords do not match"})
+		return
+	}
+
 	hashed, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Password hash failed"})
-			return
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Password hash failed"})
+		return
 	}
-	req.Password = string(hashed)
 
-	// ユーザー保存
-	if err := h.UserUsecase.CreateUser(&req); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "User creation failed"})
-			return
+	user := domain.User{
+		Name:            req.Name,
+		Email:           req.Email,
+		Password:        string(hashed),
+		CurrentPosition: req.CurrentPosition,
+		ExperienceLevel: req.ExperienceLevel,
+		Interests:       strings.Join(req.Interests, ","),
+	}
+
+	if err := h.UserUsecase.CreateUser(&user, req.TeachSkills, req.LearnSkills); err != nil {
+    c.JSON(http.StatusInternalServerError, gin.H{"error": "User creation failed"})
+    return
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "SignUp success"})
-}
-
-func (h *AuthHandler) GetMe(c *gin.Context) {
-    token, err := c.Cookie("access_token")
-    if err != nil {
-        c.JSON(http.StatusUnauthorized, gin.H{"error": "No token"})
-        return
-    }
-    userID, err := utils.ValidateJWT(token)
-    if err != nil || userID == 0 {
-        c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
-        return
-    }
-    user, err := h.UserUsecase.FindByID(userID)
-    if err != nil || user == nil {
-        c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
-        return
-    }
-    // パスワードは返さない
-    resp := gin.H{
-        "id": user.ID,
-        "name": user.Name,
-        "email": user.Email,
-        "createdAt": user.CreatedAt,
-        "updatedAt": user.UpdatedAt,
-    }
-    c.JSON(http.StatusOK, resp)
 }

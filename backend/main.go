@@ -16,12 +16,14 @@ func main() {
 				panic(err)
 		}
 		db.AutoMigrate(&domain.User{})
+		db.AutoMigrate(&domain.User{}, &domain.Skill{})
 
     // Repository, Usecase, Handlerの初期化
     userRepo := repository.NewUserRepository(db)
     userUsecase := usecase.NewUsercase(userRepo)
     authHandler := &handler.AuthHandler{UserUsecase: userUsecase}
+		userHandler := &handler.UserHandler{UserUsecase: userUsecase}
 
-    r := router.SetupRouter(authHandler)
+    r := router.SetupRouter(authHandler, userHandler)
     r.Run(":8888")
 }
