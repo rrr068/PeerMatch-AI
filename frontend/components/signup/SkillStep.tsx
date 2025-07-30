@@ -25,28 +25,15 @@ export default function SkillsStep({ formData, onFormDataChange, onNext, onBack 
   const [selectedInterest, setSelectedInterest] = useState("")
 
   const availableSkills = [
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Vue.js",
-    "Angular",
-    "Node.js",
-    "Python",
-    "Java",
-    "C++",
-    "Go",
-    "Rust",
-    "HTML/CSS",
-    "UI/UX Design",
-    "Figma",
-    "Photoshop",
-    "AWS",
-    "Docker",
-    "Kubernetes",
-    "Git",
-    "MongoDB",
-    "PostgreSQL",
+    "HTML/CSS", "JavaScript", "TypeScript", "React", "Next.js",
+    "Vue.js", "Nuxt.js", "Svelte", "SvelteKit", "Angular",
+    "Node.js", "Bun.js", "Deno", "Express.js", "Nest,js", "Hono.js",
+    "Python", "Django", "Flask", "Ruby", "Ruby on Rails",
+    "PHP", "Laravel", "CakePHP", "Java", "Spring",
+    "Spring Boot", "C#", ".NET", "C++", "Go", "Gin", "Rust",
+    "GraphQL", "AWS","Azure", "GCP", "Docker", "Kubernetes",
+    "Git", "SQL", "MySQL", "MongoDB", "PostgreSQL",
+    "その他",
   ]
 
   const availableInterests = [
@@ -61,7 +48,6 @@ export default function SkillsStep({ formData, onFormDataChange, onNext, onBack 
     "ゲーム開発",
     "IoT",
     "AR/VR",
-    "デザイン",
   ]
 
   const handleSkillAdd = (event: SelectChangeEvent) => {

@@ -23,13 +23,12 @@ interface ExperienceStepProps {
 
 export default function ExperienceStep({ formData, onFormDataChange, onNext, onBack }: ExperienceStepProps) {
   const experienceLevels = [
-    { value: "beginner", label: "初心者（0-1年）" },
-    { value: "intermediate", label: "中級者（2-4年）" },
-    { value: "advanced", label: "上級者（5年以上）" },
-    { value: "expert", label: "エキスパート（10年以上）" },
+    { value: "super_novice", label: "半年" },
+    { value: "beginner", label: "1年以上" },
+    { value: "intermediate", label: "2年以上" },
+    { value: "advanced", label: "3年以上" },
+    { value: "expert", label: "5年以上" },
   ]
-
-  const yearsOptions = ["0年", "1年", "2年", "3年", "4年", "5年", "6年", "7年", "8年", "9年", "10年以上"]
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onFormDataChange({
@@ -53,7 +52,7 @@ export default function ExperienceStep({ formData, onFormDataChange, onNext, onB
         経験について教えてください
       </Typography>
       <Typography variant="body1" className="text-center text-gray-600 mb-8">
-        あなたの経験レベルと背景を教えてください
+        あなたの経験レベルを教えてください
       </Typography>
 
       <div className="space-y-6">
@@ -76,32 +75,13 @@ export default function ExperienceStep({ formData, onFormDataChange, onNext, onB
           </Select>
         </FormControl>
 
-        <FormControl fullWidth>
-          <InputLabel>プログラミング経験年数</InputLabel>
-          <Select
-            value={formData.yearsOfExperience}
-            label="プログラミング経験年数"
-            onChange={handleSelectChange("yearsOfExperience")}
-            sx={{
-              borderRadius: "12px",
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
-            }}
-          >
-            {yearsOptions.map((year) => (
-              <MenuItem key={year} value={year}>
-                {year}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
         <TextField
           fullWidth
-          label="現在の職業・役職"
-          name="currentRole"
+          label="現在の役職"
+          name="currentPosition"
           value={formData.currentRole}
           onChange={handleChange}
-          placeholder="例：フロントエンドエンジニア、学生、転職活動中など"
+          placeholder="例：フロントエンド、バックエンド、インフラ、フルスタック...etc"
           sx={{
             "& .MuiOutlinedInput-root": {
               borderRadius: "12px",

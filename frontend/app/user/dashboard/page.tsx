@@ -8,7 +8,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios.get("http://localhost:8888/user/me", { withCredentials: true })
+    axios.get("http://localhost:8888/user/userInfo", { withCredentials: true })
       .then(res => {
         setUser(res.data)
       })
@@ -24,7 +24,8 @@ export default function DashboardPage() {
   return (
     <div>
       <h1>ダッシュボード</h1>
-      <p>ログインユーザー: {user.email}</p>
+      <p>ログインユーザー: {user.name}</p>
+      <p>メール: {user.email}</p>
     </div>
   )
 }

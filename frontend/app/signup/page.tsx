@@ -12,19 +12,18 @@ import TermsStep from "../../components/signup/TermsStep"
 export default function SignUpPage() {
   const [activeStep, setActiveStep] = useState(0)
   const [formData, setFormData] = useState({
-    // Basic Info
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    // Skills
+    currentPosition: "",
+    experienceLevel: "",
     skills: [] as string[],
     interests: [] as string[],
-    // Experience
-    experienceLevel: "",
-    yearsOfExperience: "",
-    currentRole: "",
-    // Terms
+    teachSkills: [] as string[],
+    learnSkills: [] as string[],
+    isTeacher: false,
+    isLearner: false,
     agreeToTerms: false,
     agreeToPrivacy: false,
   })
