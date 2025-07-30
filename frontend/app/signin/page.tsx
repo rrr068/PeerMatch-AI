@@ -1,12 +1,15 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Container, Paper, TextField, Button, Typography, Box, Divider } from "@mui/material"
 import Link from "next/link"
+import axios from "axios"
 
 export default function SignInPage() {
+
+  const router = useRouter()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,9 +22,17 @@ export default function SignInPage() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Sign in:", formData)
+    try {
+      await axios.post("http://localhost:8888/auth/login", formData, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      })
+      router.push("/user/dashboard")
+    } catch (error: any) {
+      alert("ログインに失敗しました")
+    }
   }
 
   return (
