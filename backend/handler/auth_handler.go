@@ -86,7 +86,7 @@ func (h *AuthHandler) SignUp(c *gin.Context) {
 		Interests:       strings.Join(req.Interests, ","),
 	}
 
-	if err := h.UserUsecase.CreateUser(&user, req.TeachSkills, req.LearnSkills); err != nil {
+	if err := h.UserUsecase.CreateUser(&user, req.TeachSkills, req.LearnSkills, req.Skills); err != nil {
     c.JSON(http.StatusInternalServerError, gin.H{"error": "User creation failed"})
     return
 	}

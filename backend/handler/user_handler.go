@@ -27,12 +27,5 @@ func (h *UserHandler) GetUser(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 		return
 	}
-	resp := gin.H{
-		"id": user.ID,
-		"name": user.Name,
-		"email": user.Email,
-		"createdAt": user.CreatedAt,
-		"updatedAt": user.UpdatedAt,
-	}
-	c.JSON(http.StatusOK, resp)
+	c.JSON(http.StatusOK, user)
 }

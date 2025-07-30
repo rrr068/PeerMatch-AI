@@ -10,7 +10,7 @@ import (
 
 type UserUsecase interface {
     Login(email, password string) (*domain.User, error)
-    CreateUser(user *domain.User, teachSkills []string, learnSkills []string) error
+    CreateUser(user *domain.User, teachSkills []string, learnSkills []string, skills []string) error
     FindByID(id uint) (*domain.User, error) // 追加
 }
 
@@ -22,8 +22,8 @@ func NewUsercase(userRepo repository.UserRepository) UserUsecase {
 	return &userUsecase{userRepo: userRepo}
 }
 
-func (u *userUsecase) CreateUser(user *domain.User, teachSkills []string, learnSkills []string) error {
-  return u.userRepo.Create(user, teachSkills, learnSkills)
+func (u *userUsecase) CreateUser(user *domain.User, teachSkills []string, learnSkills []string, skills []string) error {
+  return u.userRepo.Create(user, teachSkills, learnSkills, skills)
 }
 
 func (u *userUsecase) FindByID(id uint) (*domain.User, error) {
