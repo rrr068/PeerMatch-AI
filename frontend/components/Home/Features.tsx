@@ -45,7 +45,7 @@ export default function Features() {
         >
           なぜPeerMatch.AIなのか
         </Typography>
-        <Typography variant="h6" className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <Typography variant="h6" className="text-xl text-gray-600 mx-auto">
           最新のAI技術と豊富な機能で、あなたの学習体験を革新します
         </Typography>
       </Box>

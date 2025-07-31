@@ -33,7 +33,7 @@ export default function HowItWorks() {
           <Typography variant="h2" className="text-4xl md:text-5xl font-bold mb-6 text-white">
             簡単4ステップで始める
           </Typography>
-          <Typography variant="h6" className="text-xl text-blue-100 max-w-2xl mx-auto">
+          <Typography variant="h6" className="text-xl text-blue-100 mx-auto">
             数分で登録完了。すぐに最適なパートナーを見つけられます
           </Typography>
         </Box>

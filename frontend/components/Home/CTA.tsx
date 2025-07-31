@@ -13,7 +13,7 @@ export default function CTA() {
         >
           今すぐ始めよう
         </Typography>
-        <Typography variant="h6" className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto text-center">
+        <Typography variant="h6" className="text-xl text-gray-600 mb-8 mx-auto text-center">
           あなたの学習パートナーが待っています。無料で登録して、新しい学習体験を始めましょう。
         </Typography>
         <Link href="/signup">
@@ -25,6 +25,7 @@ export default function CTA() {
               borderRadius: "30px",
               px: 6,
               py: 2.5,
+              marginTop: 4,
               fontSize: "1.2rem",
               fontWeight: 600,
               textTransform: "none",

@@ -9,7 +9,7 @@ export default function Hero() {
       <Box className="text-center">
         <div className="mb-8">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 border border-blue-200 mb-6">
-            <span className="text-sm font-medium text-blue-700">🚀 AIが最適な学習パートナーを見つけます</span>
+            <span className="text-sm font-medium text-blue-700">AIが最適な学習パートナーを見つけます</span>
           </div>
         </div>
 
@@ -22,8 +22,8 @@ export default function Hero() {
           学習コミュニティ
         </Typography>
 
-        <Typography variant="h5" className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-          AIがあなたのスキルと性格を分析し、最適な学習仲間・開発仲間とマッチング。
+        <Typography variant="h5" className="text-xl md:text-2xl text-gray-600 mb-12 mx-auto leading-relaxed">
+          AIがあなたのスキルや意志を分析し、最適な学習仲間・開発仲間とマッチング。
           <br />
           一緒に成長できるパートナーを見つけましょう。
         </Typography>
@@ -36,8 +36,8 @@ export default function Hero() {
               sx={{
                 background: "linear-gradient(45deg, #4F46E5 30%, #7C3AED 90%)",
                 borderRadius: "30px",
-                px: 4,
-                py: 2,
+                px: 8,
+                py: 3,
                 fontSize: "1.1rem",
                 fontWeight: 600,
                 textTransform: "none",
@@ -52,34 +52,10 @@ export default function Hero() {
               無料で始める
             </Button>
           </Link>
-          <Button
-            variant="outlined"
-            size="large"
-            sx={{
-              borderRadius: "30px",
-              px: 4,
-              py: 2,
-              fontSize: "1.1rem",
-              fontWeight: 600,
-              textTransform: "none",
-              borderColor: "#4F46E5",
-              color: "#4F46E5",
-              "&:hover": {
-                borderColor: "#4338CA",
-                backgroundColor: "rgba(79, 70, 229, 0.1)",
-                transform: "translateY(-2px)",
-              },
-            }}
-          >
-            デモを見る
-          </Button>
         </Box>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           {[
-            // { number: "10,000+", label: "アクティブユーザー" },
-            // { number: "50,000+", label: "マッチング成功" },
-            // { number: "95%", label: "満足度" },
             { number: "0", label: "see you soon" },
             { number: "100+", label: "多様なスキル人材が多数" },
             { number: "2", label: "ヶ月後" }

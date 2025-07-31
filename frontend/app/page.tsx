@@ -1,7 +1,7 @@
-import Hero from "../components/Hero"
-import Features from "../components/Features"
-import HowItWorks from "../components/HowItWorks"
-import CTA from "../components/CTA"
+import Hero from "../components/Home/Hero"
+import Features from "../components/Home/Features"
+import HowItWorks from "../components/Home/HowItWorks"
+import CTA from "../components/Home/CTA"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 
