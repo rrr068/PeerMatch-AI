@@ -122,7 +122,8 @@ export default function SignInPage() {
 
           <Divider sx={{ my: 3 }}>または</Divider>
 
-          <Button
+          {/* Googleログインは後日実装する予定なので、一旦非表示にする */}
+          {/* <Button
             fullWidth
             variant="outlined"
             size="large"
@@ -141,7 +142,7 @@ export default function SignInPage() {
             }}
           >
             Googleでサインイン
-          </Button>
+          </Button> */}
 
           <Box className="text-center mt-6">
             <Typography variant="body2" className="text-gray-600">
