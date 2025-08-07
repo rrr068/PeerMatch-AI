@@ -56,6 +56,20 @@ export default function Header() {
               無料で始める
             </Button>
           </Link>
+          <Link href="/contact">
+            <Button
+              variant="text"
+              sx={{
+                color: "#4F46E5",
+                fontWeight: 600,
+                "&:hover": {
+                  backgroundColor: "rgba(79, 70, 229, 0.1)",
+                },
+              }}
+            >
+              お問い合わせ
+            </Button>
+          </Link>
         </Box>
       </Toolbar>
     </AppBar>
